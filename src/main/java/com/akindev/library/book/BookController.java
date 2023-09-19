@@ -1,28 +1,44 @@
 package com.akindev.library.book;
 
 
+import com.akindev.library.book.models.dtos.BookDto;
+import com.akindev.library.book.services.BookServiceImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("books")
 public class BookController {
 
+    private final BookServiceImpl bookService;
+
+    public BookController(BookServiceImpl bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping("")
-    public void getBooks(){}
+    public ResponseEntity getBooks(){
+        return new ResponseEntity<>(bookService.findAllBooks(), HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
-    public void getBookById(@PathVariable int id){}
+    public void getBookById(@PathVariable int id){
+
+    }
 
 
     @PostMapping("")
-    public void createBook(){}
+    public void createBook(@RequestBody BookDto book){
 
-    @PutMapping("/{id}")
-    public void updateBook(@PathVariable int id){}
 
-    @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable int id){}
+    }
+
+    @PutMapping("/{authorId}/bookId/{isbn}")
+    public void updateBook(@PathVariable int authorId, @PathVariable String isbn){}
+
+    @DeleteMapping("/{authorId}/bookId/{isbn}")
+    public void deleteBook(@PathVariable int  authorId, @PathVariable String isbn){}
 
 
 

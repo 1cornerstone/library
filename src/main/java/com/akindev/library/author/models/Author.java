@@ -1,6 +1,6 @@
 package com.akindev.library.author.models;
 
-import com.akindev.library.book.Book;
+import com.akindev.library.book.models.Book;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;

@@ -1,4 +1,4 @@
-package com.akindev.library.book;
+package com.akindev.library.book.models;
 
 import com.akindev.library.author.models.Author;
 import lombok.NoArgsConstructor;
@@ -28,6 +28,9 @@ public class Book {
 
     @Column
     private Date dateWritten;
+
+    @CreationTimestamp
+    private Date dateCreated;
 
     @ManyToOne(targetEntity = Author.class, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
