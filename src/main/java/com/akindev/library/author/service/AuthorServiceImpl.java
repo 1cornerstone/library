@@ -3,6 +3,8 @@ package com.akindev.library.author.service;
 import com.akindev.library.author.models.Author;
 import com.akindev.library.author.repositories.AuthorRepository;
 import com.akindev.library.author.service.interfaces.AuthorService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,5 +36,18 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Optional<Author> getAuthorById(int id) {
         return authorRepository.findById(id);
+    }
+
+    @Override
+    public void deleteAuthorById(int id) {
+        authorRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Author> updateAuthorById(int id, Author author) {
+        return authorRepository.findById(id).map(target->{
+            target.setName(author.getName());
+            return target;
+        });
     }
 }

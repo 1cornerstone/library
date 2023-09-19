@@ -11,4 +11,8 @@ public interface AuthorService {
     List<Author> findAll();
 
     Optional<Author> getAuthorById(int id);
+
+     void deleteAuthorById(int id);
+
+     Optional<Author> updateAuthorById(int id, Author author);
 }

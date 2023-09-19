@@ -1,6 +1,7 @@
 package com.akindev.library.book;
 
 import com.akindev.library.author.models.Author;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table
+@NoArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -27,7 +29,6 @@ public class Book {
     @Column
     private Date dateWritten;
 
-    @Column
     @ManyToOne(targetEntity = Author.class, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
     private Author author;

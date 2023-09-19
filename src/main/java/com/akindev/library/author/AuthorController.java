@@ -1,14 +1,12 @@
 package com.akindev.library.author;
 
 import com.akindev.library.author.models.Author;
-import com.akindev.library.author.models.dtos.CreateAuthorDto;
+import com.akindev.library.author.models.dtos.AuthorDto;
 import com.akindev.library.author.service.AuthorServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +17,6 @@ import java.util.Optional;
 @RequestMapping("authors")
 
 public class AuthorController {
-
 
     private  final AuthorServiceImpl authorService;
 
@@ -35,7 +32,6 @@ public class AuthorController {
     @GetMapping("/{id}")
     public ResponseEntity getAuthorById(@PathVariable int id){
 
-        System.out.println("here");
         Optional<Author> author = authorService.getAuthorById(id);
 
         if(author.isEmpty()){
@@ -47,14 +43,7 @@ public class AuthorController {
     }
 
     @PostMapping("")
-    public ResponseEntity registerAuthor(@Valid @RequestBody CreateAuthorDto authorDto){
-
-        System.out.println(authorDto);
-        if(!authorDto.getAdminCode().equals("13443")){
-            HashMap<String, String> json = new HashMap<>();
-            json.put("message","Admin code not correct");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
-        }
+    public ResponseEntity registerAuthor(@Valid @RequestBody AuthorDto authorDto){
 
         Author author = new Author(authorDto.getName());
 
@@ -62,11 +51,23 @@ public class AuthorController {
 
     }
 
-    @PutMapping("/{id}")
-    public void update(@PathVariable int id){}
+    @PatchMapping("/{id}")
+    public ResponseEntity update(@PathVariable int id, @Valid @RequestBody AuthorDto authorDto ){
+        Optional<Author> author = authorService.updateAuthorById(id, new Author(authorDto.getName()));
+        if(author.isEmpty()){
+            HashMap<String, String> json = new HashMap<>();
+            json.put("message","Author not found");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
+        }
+
+        return new ResponseEntity(author,HttpStatus.OK);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteAuthor(@PathVariable int id){}
+    public ResponseEntity deleteAuthor(@PathVariable int id){
+        authorService.deleteAuthorById(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 
 
