@@ -37,7 +37,7 @@ public class AuthorController {
         if(author.isEmpty()){
             HashMap<String, String> json = new HashMap<>();
             json.put("message","Author not found");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(json);
         }
         return new ResponseEntity<>(author.get(), HttpStatus.OK);
     }
@@ -57,7 +57,7 @@ public class AuthorController {
         if(author.isEmpty()){
             HashMap<String, String> json = new HashMap<>();
             json.put("message","Author not found");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(json);
         }
 
         return new ResponseEntity(author,HttpStatus.OK);

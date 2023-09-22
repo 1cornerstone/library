@@ -1,20 +1,29 @@
 package com.akindev.library.book;
 
 
+import com.akindev.library.author.models.Author;
+import com.akindev.library.author.service.AuthorServiceImpl;
+import com.akindev.library.book.models.Book;
 import com.akindev.library.book.models.dtos.BookDto;
 import com.akindev.library.book.services.BookServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("books")
 public class BookController {
 
     private final BookServiceImpl bookService;
+    private final AuthorServiceImpl authorService;
 
-    public BookController(BookServiceImpl bookService) {
+    public BookController(BookServiceImpl bookService, AuthorServiceImpl authorService) {
         this.bookService = bookService;
+        this.authorService = authorService;
     }
 
     @GetMapping("")
@@ -25,17 +34,58 @@ public class BookController {
     @GetMapping("/{id}")
     public ResponseEntity getBookById(@PathVariable int id){
 
+        Optional<Book> book = bookService.findBookById(id);
+
+        if(book.isEmpty()){
+            HashMap<String, String> json = new HashMap<>();
+            json.put("message","Book not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(json);
+        }
+        return new ResponseEntity(book.get(),HttpStatus.OK);
     }
 
     @PostMapping("")
-    public void createBook(@RequestBody BookDto book){
+    public ResponseEntity createBook(@RequestBody BookDto book){
 
+        Book _book = new Book();
+        _book.setTitle(book.getTitle());
+        _book.setIsbnNumber(book.getIsbnNumber());
+        _book.setPrice(book.getPrice());
+        _book.setNumberOfPage(book.getPages());
+        _book.setDateWritten(book.getDateWritten());
+         Optional<Author> author = authorService.getAuthorById(book.getAuthorId());
+
+         if(author.isEmpty()){
+             HashMap<String, String> json = new HashMap<>();
+             json.put("message","Author not found");
+             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(json);
+         }
+
+        _book.setAuthor(author.get());
+
+        return new ResponseEntity(bookService.createBook(_book), HttpStatus.CREATED);
     }
-    @PutMapping("/{authorId}/bookId/{isbn}")
-    public void updateBook(@PathVariable int authorId, @PathVariable String isbn){}
 
-    @DeleteMapping("/{authorId}/bookId/{isbn}")
-    public void deleteBook(@PathVariable int  authorId, @PathVariable String isbn){}
+    @PutMapping("/{bookId}")
+    public ResponseEntity updateBook( @PathVariable int bookId, @Valid @RequestBody BookDto book){
+        Optional<Book> _book = bookService.updateBookById(bookId, book);
+
+        if(_book.isEmpty()){
+            if(_book.isEmpty()){
+                HashMap<String, String> json = new HashMap<>();
+                json.put("message","Book not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(json);
+            }
+        }
+
+        return new ResponseEntity(_book.get(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{authorId}/bookId/{bookId}")
+    public ResponseEntity deleteBook(@PathVariable int  authorId, @PathVariable int bookId){
+        bookService.deleteBook(authorId, bookId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 
 

@@ -40,7 +40,10 @@ public class Book {
     @Column(updatable = false)
     private Date createdAt;
 
-    public Book( String title, int numberOfPage, double price, String isbnNumber, Date dateWritten) {
+
+    public Book() {}
+
+    public Book(String title, int numberOfPage, double price, String isbnNumber, Date dateWritten) {
         this.title = title;
         this.numberOfPage = numberOfPage;
         this.price = price;
@@ -80,13 +83,13 @@ public class Book {
         this.price = price;
     }
 
-//    public Author getAuthor() {
-//        return author;
-//    }
+    public Author getAuthor() {
+        return author;
+    }
 
-//    public void setAuthor(Author author) {
-//        this.author = author;
-//    }
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
 
     public String getIsbnNumber() {
         return isbnNumber;

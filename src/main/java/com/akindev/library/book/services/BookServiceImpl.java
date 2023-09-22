@@ -1,6 +1,7 @@
 package com.akindev.library.book.services;
 
 import com.akindev.library.book.models.Book;
+import com.akindev.library.book.models.dtos.BookDto;
 import com.akindev.library.book.repositories.BookRepository;
 import com.akindev.library.book.services.interfaces.BookService;
 
@@ -34,18 +35,24 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Optional<Book> updateBookById(int id, Book book) {
+    public Optional<Book> updateBookById(int id, BookDto book) {
+        // check if authorId is the same
         return bookRepository.findById(id).map(_book ->{
             _book.setPrice(book.getPrice());
             _book.setTitle(book.getTitle());
-            _book.setNumberOfPage(book.getNumberOfPage());
+            _book.setNumberOfPage(book.getPages());
             _book.setIsbnNumber(book.getIsbnNumber());
-            return  _book;
+            return _book;
         } );
     }
 
     @Override
-    public void deleteBook(int id) {
-        bookRepository.deleteById(id);
+    public void deleteBook(int authorId, int id) {
+        Optional<Book> book = findBookById(id);
+        if(book.isPresent()){
+            if(book.get().getAuthor().getId() == authorId)
+                bookRepository.deleteById(id);
+        }
     }
+
 }
