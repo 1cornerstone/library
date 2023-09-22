@@ -23,17 +23,14 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public void getBookById(@PathVariable int id){
+    public ResponseEntity getBookById(@PathVariable int id){
 
     }
-
 
     @PostMapping("")
     public void createBook(@RequestBody BookDto book){
 
-
     }
-
     @PutMapping("/{authorId}/bookId/{isbn}")
     public void updateBook(@PathVariable int authorId, @PathVariable String isbn){}
 
