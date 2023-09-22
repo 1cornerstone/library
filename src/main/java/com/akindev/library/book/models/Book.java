@@ -1,6 +1,8 @@
 package com.akindev.library.book.models;
 
 import com.akindev.library.author.models.Author;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -9,7 +11,6 @@ import java.util.Date;
 
 @Entity
 @Table
-@NoArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -32,14 +33,14 @@ public class Book {
     @CreationTimestamp
     private Date dateCreated;
 
-    @ManyToOne(targetEntity = Author.class, cascade = CascadeType.REMOVE)
+    @ManyToOne(targetEntity = Author.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
+    @JsonIgnore
     private Author author;
 
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
-
 
     public Book() {}
 

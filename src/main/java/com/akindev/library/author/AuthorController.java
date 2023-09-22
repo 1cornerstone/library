@@ -5,6 +5,7 @@ import com.akindev.library.author.models.dtos.AuthorDto;
 import com.akindev.library.author.service.AuthorServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,10 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-
+@Validated
 @RestController
 @RequestMapping("authors")
-
 public class AuthorController {
 
     private  final AuthorServiceImpl authorService;
@@ -26,7 +26,7 @@ public class AuthorController {
 
     @GetMapping("")
     public ResponseEntity<List<Author>> getAuthors(){
-        return new ResponseEntity<>(authorService.findAll(), HttpStatus.OK);
+        return new ResponseEntity(authorService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

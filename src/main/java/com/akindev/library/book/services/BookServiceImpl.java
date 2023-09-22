@@ -4,11 +4,14 @@ import com.akindev.library.book.models.Book;
 import com.akindev.library.book.models.dtos.BookDto;
 import com.akindev.library.book.repositories.BookRepository;
 import com.akindev.library.book.services.interfaces.BookService;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class BookServiceImpl implements BookService {
 
     private BookRepository bookRepository;
@@ -34,6 +37,7 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findById(id);
     }
 
+    @Transactional
     @Override
     public Optional<Book> updateBookById(int id, BookDto book) {
         // check if authorId is the same
@@ -47,10 +51,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook(int authorId, int id) {
+    public void deleteBook(int id) {
         Optional<Book> book = findBookById(id);
         if(book.isPresent()){
-            if(book.get().getAuthor().getId() == authorId)
+//            if(book.get().getAuthor().getId() == authorId)
                 bookRepository.deleteById(id);
         }
     }

@@ -14,5 +14,5 @@ public interface BookService  {
 
     public Optional<Book> updateBookById(int id, BookDto book);
 
-    public void deleteBook(int authorId, int id);
+    public void deleteBook(int id);
 }

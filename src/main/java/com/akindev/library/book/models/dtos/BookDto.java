@@ -3,6 +3,8 @@ package com.akindev.library.book.models.dtos;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.Date;
 
 @Data
@@ -11,22 +13,20 @@ public class BookDto {
     @NotBlank(message = " title is required")
     private String title;
 
-    @NotBlank(message = " no of page is required")
+    @NotNull(message = "number of page is required")
     private int pages;
 
     @NotBlank(message = "ISBN number is required")
     private String isbnNumber;
 
-    @NotBlank(message = "Date written is required")
+    @NotNull(message = "Date written is required")
     private Date dateWritten;
 
-    @NotBlank(message = "Price is required")
+    @NotNull(message = "Price is required")
     private int price;
 
-    @NotBlank(message = "Price is required")
+    @NotNull(message = "Author id is required")
     private int authorId;
-
-
 
     public String getTitle() {
         return title;
