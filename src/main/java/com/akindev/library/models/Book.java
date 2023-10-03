@@ -1,9 +1,6 @@
-package com.akindev.library.book.models;
+package com.akindev.library.models;
 
-import com.akindev.library.author.models.Author;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;

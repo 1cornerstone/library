@@ -1,6 +1,7 @@
-package com.akindev.library.author.models.dtos;
+package com.akindev.library.models.dtos;
 
 import lombok.Data;
+
 import javax.validation.constraints.NotBlank;
 
 

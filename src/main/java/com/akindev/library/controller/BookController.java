@@ -1,11 +1,11 @@
-package com.akindev.library.book;
+package com.akindev.library.controller;
 
 
-import com.akindev.library.author.models.Author;
-import com.akindev.library.author.service.AuthorServiceImpl;
-import com.akindev.library.book.models.Book;
-import com.akindev.library.book.models.dtos.BookDto;
-import com.akindev.library.book.services.BookServiceImpl;
+import com.akindev.library.models.Author;
+import com.akindev.library.models.Book;
+import com.akindev.library.models.dtos.BookDto;
+import com.akindev.library.service.implementation.AuthorServiceImpl;
+import com.akindev.library.service.implementation.BookServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

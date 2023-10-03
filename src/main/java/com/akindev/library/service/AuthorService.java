@@ -1,6 +1,6 @@
-package com.akindev.library.author.service.interfaces;
+package com.akindev.library.service;
 
-import com.akindev.library.author.models.Author;
+import com.akindev.library.models.Author;
 
 import java.util.List;
 import java.util.Optional;

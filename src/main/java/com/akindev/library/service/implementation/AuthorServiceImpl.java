@@ -1,10 +1,9 @@
-package com.akindev.library.author.service;
+package com.akindev.library.service.implementation;
 
-import com.akindev.library.author.models.Author;
-import com.akindev.library.author.repositories.AuthorRepository;
-import com.akindev.library.author.service.interfaces.AuthorService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.akindev.library.models.Author;
+import com.akindev.library.repositories.AuthorRepository;
+import com.akindev.library.service.AuthorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,13 +13,10 @@ import java.util.Optional;
 
 
 @Service
+@RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
 
-    private  final AuthorRepository authorRepository;
-
-    public AuthorServiceImpl(AuthorRepository authorRepository) {
-        this.authorRepository = authorRepository;
-    }
+    private final AuthorRepository authorRepository;
 
     @Override
     public Author create(Author author) {

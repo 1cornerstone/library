@@ -1,8 +1,8 @@
-package com.akindev.library.author.models;
+package com.akindev.library.models;
 
-import com.akindev.library.book.models.Book;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -11,7 +11,8 @@ import java.util.List;
 
 @Entity
 @Table
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Author {
 
@@ -22,7 +23,7 @@ public class Author {
     @Column
     private String name;
 
-    @OneToMany(targetEntity = Book.class, mappedBy = "author", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     private List<Book> books;
 
     @CreationTimestamp
@@ -31,26 +32,5 @@ public class Author {
 
     public Author(String name) {
         this.name = name;
-    }
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
     }
 }

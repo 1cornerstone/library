@@ -1,8 +1,8 @@
-package com.akindev.library.author;
+package com.akindev.library.controller;
 
-import com.akindev.library.author.models.Author;
-import com.akindev.library.author.models.dtos.AuthorDto;
-import com.akindev.library.author.service.AuthorServiceImpl;
+import com.akindev.library.models.Author;
+import com.akindev.library.models.dtos.AuthorDto;
+import com.akindev.library.service.implementation.AuthorServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

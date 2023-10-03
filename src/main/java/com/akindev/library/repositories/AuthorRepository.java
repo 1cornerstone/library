@@ -1,6 +1,6 @@
-package com.akindev.library.author.repositories;
+package com.akindev.library.repositories;
 
-import com.akindev.library.author.models.Author;
+import com.akindev.library.models.Author;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,10 +1,9 @@
-package com.akindev.library.book.models.dtos;
+package com.akindev.library.models.dtos;
 
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.util.Date;
 
 @Data

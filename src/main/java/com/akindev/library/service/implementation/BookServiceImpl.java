@@ -1,9 +1,9 @@
-package com.akindev.library.book.services;
+package com.akindev.library.service.implementation;
 
-import com.akindev.library.book.models.Book;
-import com.akindev.library.book.models.dtos.BookDto;
-import com.akindev.library.book.repositories.BookRepository;
-import com.akindev.library.book.services.interfaces.BookService;
+import com.akindev.library.models.Book;
+import com.akindev.library.models.dtos.BookDto;
+import com.akindev.library.repositories.BookRepository;
+import com.akindev.library.service.BookService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
